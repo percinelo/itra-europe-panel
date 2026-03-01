@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>ITRA Europe Control Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial; padding: 20px; background:#f4f4f4; }
+    h1 { font-size: 20px; }
+    select { padding:10px; width:100%; margin-bottom:10px; }
+    table { width:100%; border-collapse: collapse; background:white; }
+    th, td { padding:10px; border:1px solid #ddd; text-align:left; }
+  </style>
+</head>
+<body>
+
+<h1>ITRA Europe Races</h1>
+
+<select id="countryFilter" onchange="filterRaces()">
+  <option value="">All Countries</option>
+  <option value="France">France</option>
+  <option value="Italy">Italy</option>
+  <option value="Spain">Spain</option>
+  <option value="Switzerland">Switzerland</option>
+</select>
+
+<table>
+  <thead>
+    <tr>
+      <th>Race</th>
+      <th>Country</th>
+      <th>Date</th>
+      <th>Distance</th>
+    </tr>
+  </thead>
+  <tbody id="raceTable"></tbody>
+</table>
+
+<script>
+const races = [
+  {name:"UTMB Mont Blanc", country:"France", date:"2026-08-28", distance:"100km"},
+  {name:"Lavaredo Ultra Trail", country:"Italy", date:"2026-06-25", distance:"120km"},
+  {name:"Transgrancanaria", country:"Spain", date:"2026-02-18", distance:"128km"},
+  {name:"Swiss Canyon Trail", country:"Switzerland", date:"2026-06-10", distance:"111km"}
+];
+
+function renderTable(data){
+  const table = document.getElementById("raceTable");
+  table.innerHTML = "";
+  data.forEach(r => {
+    table.innerHTML += `
+      <tr>
+        <td>${r.name}</td>
+        <td>${r.country}</td>
+        <td>${r.date}</td>
+        <td>${r.distance}</td>
+      </tr>`;
+  });
+}
+
+function filterRaces(){
+  const country = document.getElementById("countryFilter").value;
+  if(country === ""){
+    renderTable(races);
+  } else {
+    renderTable(races.filter(r => r.country === country));
+  }
+}
+
+renderTable(races);
+</script>
+
+</body>
+</html>
+initial commit
