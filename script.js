@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let races = [];
   let sortAsc = true;
 
-  fetch("races.json")
+  fetch("./races.json")
     .then(res => res.json())
     .then(data => {
       races = data;
